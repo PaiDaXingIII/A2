@@ -24,7 +24,7 @@ exports.getUpcomingEvents = async (req, res) => {
 };
 
 /**
- * 2. 获取所有活动类别（供搜索页筛选表单使用）
+ * 2. 获取所有活动类别
  */
 exports.getAllCategories = async (req, res) => {
   try {
@@ -38,7 +38,6 @@ exports.getAllCategories = async (req, res) => {
 
 /**
  * 3. 搜索活动（支持按日期、地点、类别筛选，单条件/多条件组合）
- * 前端参数：date（可选）、location（可选）、categoryId（可选）
  */
 exports.searchEvents = async (req, res) => {
   try {
@@ -52,7 +51,7 @@ exports.searchEvents = async (req, res) => {
     `;
     const params = [];
 
-    // 动态拼接筛选条件（避免SQL注入）
+    // 动态拼接筛选条件
     if (date) {
       query += ' AND DATE(e.event_date) = ?';
       params.push(date);
@@ -75,7 +74,7 @@ exports.searchEvents = async (req, res) => {
 };
 
 /**
- * 4. 根据ID获取活动详情（包含完整信息：名称、时间、地点、票务、筹款进度等）
+ * 4. 根据ID获取活动详情
  */
 exports.getEventById = async (req, res) => {
   try {
@@ -93,7 +92,17 @@ exports.getEventById = async (req, res) => {
     if (events.length === 0) {
       return res.status(404).json({ error: 'Event not found or inactive' });
     }
-    res.json(events[0]); // 返回单个活动详情
+
+    // 关键修复：将数值字段从字符串转换为数字
+    const event = events[0];
+    const eventWithNumbers = {
+      ...event,
+      ticket_price: Number(event.ticket_price),       // 转换为数字
+      fund_target: Number(event.fund_target),         // 转换为数字
+      current_fund: Number(event.current_fund)        // 转换为数字
+    };
+
+    res.json(eventWithNumbers); // 返回转换后的活动详情
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch event details: ' + error.message });
   }

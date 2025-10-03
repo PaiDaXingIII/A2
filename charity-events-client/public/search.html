@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Events</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Charity Events</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search Events</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Search Charity Events</h1>
+
+    <!-- 筛选表单 -->
+    <form id="filter-form" class="filter-form">
+      <div class="form-group">
+        <label for="date">Event Date</label>
+        <input type="date" id="date" name="date">
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="e.g., Sydney">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="">All Categories</option>
+          <!-- 动态填充类别选项 -->
+        </select>
+      </div>
+      <button type="submit" class="btn">Search</button>
+      <button type="button" id="clear-btn" class="btn" style="background-color: #e74c3c;">Clear Filters</button>
+    </form>
+
+    <!-- 搜索结果区 -->
+    <div id="results-container"></div>
+    <div id="error-message" style="color: red; margin: 1rem 0;"></div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

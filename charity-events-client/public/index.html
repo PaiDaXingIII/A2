@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity Events - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 导航栏（复用全局组件） -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Charity Events</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="search.html">Search Events</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 静态内容区 -->
+  <div class="container">
+    <section class="about">
+      <h1>About Our Charity Platform</h1>
+      <p>We connect people with meaningful charity events in the city. Join us to make a difference!</p>
+      <h2>Our Mission</h2>
+      <p>To promote social welfare by organizing and supporting charity activities that address community needs.</p>
+      <h2>Contact Us</h2>
+      <p>Email: 14332239526@136.com | Phone: +64-14332239526</p>
+    </section>
+
+    <!-- 动态活动列表区 -->
+    <section class="upcoming-events">
+      <h2>Upcoming & Current Events</h2>
+      <div id="events-container"></div> <!-- 动态填充活动卡片 -->
+      <div id="error-message" style="color: red; margin: 1rem 0;"></div> <!-- 错误提示 -->
+    </section>
+  </div>
+
+  <!-- 引入API工具和首页逻辑 -->
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
